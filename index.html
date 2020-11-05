@@ -1,40 +1,325 @@
 <!DOCTYPE html>
 <html >
-<!--From https://codepen.io/frytyler/pen/EGdtg-->
 <head>
-  <meta charset="UTF-8">
-  <title>ML API</title>
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="app.css">
-
-
+	<title>Machine Learning API</title>
 </head>
+<body>
+	<div>
+		<h1>Predict Weathered Oil Type</h1>
+		<label>Select a biomarker</label><br>
+		<select id="biomarkersSelector" onchange="showForm()">
+		<option value="Terpanes">Terpanes</option>
+		<option value="Diamantanes">Diamantanes</option>
+		<option value="MA-steranes">MA-steranes</option>
+		<option value="TA-steranes">TA-steranes</option>
+		<option value="Steranes">Steranes</option>
+		</select>
+	<br><br>
+	</div>
+	
+	<div>
+		<form id="Terpanes" style="display: block">
+			<label>Input feature values for Terpanes</label>
+			<table>
+				<tr>
+					<td><label>C25/H35S</label></td>
+					<td><input type="text" id="Terpanes_C25/H35S"/></td>
+				</tr>
+				<tr>
+					<td><label>H35S/H32R</label></td>
+					<td><input type="text" id="Terpanes_H35S/H32R"/></td>
+				</tr>
+				<tr>
+					<td><label>C25/C27b</label></td>
+					<td><input type="text" id="Terpanes_C25/C27b"/></td>
+				</tr>
+				<tr>
+					<td><label>H35S/H34R</label></td>
+					<td><input type="text" id="Terpanes_H35S/H34R"/></td>
+				</tr>
+				<tr>
+					<td><label>C26/C28a</label></td>
+					<td><input type="text" id="Terpanes_C26/C28a"/></td>
+				</tr>
+				<tr>
+					<td><label>H32S/H32R</label></td>
+					<td><input type="text" id="Terpanes_H32S/H32R"/></td>
+				</tr>
+				<tr>
+					<td><label>H31S/H31R</label></td>
+					<td><input type="text" id="Terpanes_H31S/H31R"/></td>
+				</tr>
+				<tr>
+					<td><label>H32S/H33R</label></td>
+					<td><input type="text" id="Terpanes_H32S/H33R"/></td>
+				</tr>
+				<tr>
+					<td><label>Ts/Tm</label></td>
+					<td><input type="text" id="Terpanes_Ts/Tm"/></td>
+				</tr>
+				<tr>
+					<td><label>H33R/H34S</label></td>
+					<td><input type="text" id="Terpanes_H33R/H34S"/></td>
+				</tr>
+				<tr>
+					<td><label>H31R/H32S</label></td>
+					<td><input type="text" id="Terpanes_H31R/H32S"/></td>
+				</tr>
+				<tr>
+					<td><label>Tm/C30</label></td>
+					<td><input type="text" id="Terpanes_Tm/C30"/></td>
+				</tr>
+				<tr>
+					<td><label>C23/C25</label></td>
+					<td><input type="text" id="Terpanes_C23/C25"/></td>
+				</tr>
+			</table>
+		</form>
+		<form id="Diamantanes" style="display: none">
+			<label>Input feature values for Diamantanes</label>
+			<table>
+				<tr>
+					<td><label>3,4-dimethyldiamantane/4-methyldiamantane</label></td>
+					<td><input type="text" id="Diamantanes_92"/></td>
+				</tr>
+				<tr>
+					<td><label>1,4-and 2,4-dimethyldiamantane/1-methyldiamantane</label></td>
+					<td><input type="text" id="Diamantanes_54"/></td>
+				</tr>
+				<tr>
+					<td><label>diamantane/1-methyldiamantane</label></td>
+					<td><input type="text" id="Diamantanes_14"/></td>
+				</tr>
+				<tr>
+					<td><label>1,4-and 2,4-dimethyldiamantane/3</label></td>
+					<td><input type="text" id="Diamantanes_53"/></td>
+				</tr>
+				<tr>
+					<td><label>4,8-dimethyldiamantane/trimethyldiamantane</label></td>
+					<td><input type="text" id="Diamantanes_67"/></td>
+				</tr>
+			</table>
+		</form>
+		<form id="MA-steranes" style="display: none">
+			<label>Input feature values for MA-steranes</label>
+			<table>
+				<tr>
+					<td><label>1/12</label></td>
+					<td><input type="text" id="MA-steranes_112"/></td>
+				</tr>
+				<tr>
+					<td><label>4/11</label></td>
+					<td><input type="text" id="MA-steranes_411"/></td>
+				</tr>
+				<tr>
+					<td><label>5/4</label></td>
+					<td><input type="text" id="MA-steranes_54"/></td>
+				</tr>
+				<tr>
+					<td><label>12/6</label></td>
+					<td><input type="text" id="MA-steranes_126"/></td>
+				</tr>
+				<tr>
+					<td><label>11/8+9+10</label></td>
+					<td><input type="text" id="MA-steranes_118+9+10"/></td>
+				</tr>
+				<tr>
+					<td><label>6/7</label></td>
+					<td><input type="text" id="MA-steranes_67"/></td>
+				</tr>
+				<tr>
+					<td><label>8+9+10/12</label></td>
+					<td><input type="text" id="MA-steranes_8+9+1012"/></td>
+				</tr>
+			</table>
+		</form>
+		<form id="TA-steranes" style="display: none">
+			<label>Input feature values for TA-steranes</label>
+			<table>
+				<tr>
+					<td><label>3b/7</label></td>
+					<td><input type="text" id="TA-steranes_3b7"/></td>
+				</tr>
+				<tr>
+					<td><label>3b/1</label></td>
+					<td><input type="text" id="TA-steranes_3b1"/></td>
+				</tr>
+				<tr>
+					<td><label>8/6</label></td>
+					<td><input type="text" id="TA-steranes_86"/></td>
+				</tr>
+				<tr>
+					<td><label>6/4</label></td>
+					<td><input type="text" id="TA-steranes_64"/></td>
+				</tr>
+				<tr>
+					<td><label>6/7</label></td>
+					<td><input type="text" id="TA-steranes_67"/></td>
+				</tr>
+				<tr>
+					<td><label>3b/3a</label></td>
+					<td><input type="text" id="TA-steranes_3b3a"/></td>
+				</tr>
+				<tr>
+					<td><label>2/1</label></td>
+					<td><input type="text" id="TA-steranes_21"/></td>
+				</tr>
+			</table>
+		</form>
+		<form id="Steranes" style="display: none">
+			<label>Input feature values for Steranes</label>
+			<table>
+				<tr>
+					<td><label>16/1</label></td>
+					<td><input type="text" id="Steranes_161"/></td>
+				</tr>
+				<tr>
+					<td><label>14/18</label></td>
+					<td><input type="text" id="Steranes_1418"/></td>
+				</tr>
+				<tr>
+					<td><label>8/7</label></td>
+					<td><input type="text" id="Steranes_87"/></td>
+				</tr>
+				<tr>
+					<td><label>16/13</label></td>
+					<td><input type="text" id="Steranes_1613"/></td>
+				</tr>
+				<tr>
+					<td><label>17/16</label></td>
+					<td><input type="text" id="Steranes_1716"/></td>
+				</tr>
+				<tr>
+					<td><label>8/10</label></td>
+					<td><input type="text" id="Steranes_810"/></td>
+				</tr>
+				<tr>
+					<td><label>11/8</label></td>
+					<td><input type="text" id="Steranes_118"/></td>
+				</tr>
+				<tr>
+					<td><label>8/11</label></td>
+					<td><input type="text" id="Steranes_811"/></td>
+				</tr>
+				<tr>
+					<td><label>15/13</label></td>
+					<td><input type="text" id="Steranes_1513"/></td>
+				</tr>
+				<tr>
+					<td><label>13/14</label></td>
+					<td><input type="text" id="Steranes_1314"/></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<br><br>
+	<button id="predict">Predict</button><br><br>
 
-<body style="background: #000;">
- <div class="login">
-	<h1>Predict Oil Type</h1>
+	<p>Prediction result: <span id="result"></span></p>
+	
+	<script language="javascript">
+	function showForm() {
+		hideAllForms();
+		var biomarker = document.getElementById("biomarkersSelector").value;
+		var form = document.getElementById(biomarker);
+		form.style.display = "block";
+	}
 
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('static')}}" method="post" >
-    	<input type="text" name="1/12" placeholder="1/12" required="required" />
-        <input type="text" name="4/11" placeholder="4/11" required="required" />
-        <input type="text" name="5/4" placeholder="5/4" required="required" />
-        <input type="text" name="12/6" placeholder="12/6" required="required" />
-        <input type="text" name="11/8+9+10" placeholder="11/8+9+10" required="required" />
-        <input type="text" name="6/7" placeholder="6/7" required="required" />
-		<input type="text" name="8+9+10/12" placeholder="8+9+10/12" required="required" />
-
-        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
-    </form>
-
-   <br>
-   <br>
-   {{ prediction_text }}
-
- </div>
+	
+	function hideAllForms() {
+		var form;
+		form = document.getElementById("Terpanes");
+		form.style.display = "none";
+		form = document.getElementById("Diamantanes");
+		form.style.display = "none";
+		form = document.getElementById("MA-steranes");
+		form.style.display = "none";
+		form = document.getElementById("TA-steranes");
+		form.style.display = "none";
+		form = document.getElementById("Steranes");
+		form.style.display = "none";
+	}
+	</script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script language="javascript">
+	$(document).ready(function(){
+		$("#predict").click(function(){
+			var biomarker = document.getElementById("biomarkersSelector").value;
+			var featureArray; 
+			switch(biomarker) {
+				case "Terpanes":
+					var feature01 = document.getElementById("Terpanes_C25/H35S").value;
+					var feature02 = document.getElementById("Terpanes_H35S/H32R").value;
+					var feature03 = document.getElementById("Terpanes_C25/C27b").value;
+					var feature04 = document.getElementById("Terpanes_H35S/H34R").value;
+					var feature05 = document.getElementById("Terpanes_C26/C28a").value;
+					var feature06 = document.getElementById("Terpanes_H32S/H32R").value;
+					var feature07 = document.getElementById("Terpanes_H31S/H31R").value;
+					var feature08 = document.getElementById("Terpanes_H32S/H33R").value;
+					var feature09 = document.getElementById("Terpanes_Ts/Tm").value;
+					var feature10 = document.getElementById("Terpanes_H33R/H34S").value;
+					var feature11 = document.getElementById("Terpanes_H31R/H32S").value;
+					var feature12 = document.getElementById("Terpanes_Tm/C30").value;
+					var feature13 = document.getElementById("Terpanes_C23/C25").value;
+					featureArray = {value00: biomarker, value01: feature01, value02: feature02, value03: feature03,
+					value04: feature04, value05: feature05,value06: feature06, value07: feature07, value08: feature08
+					, value09: feature09, value10: feature10, value11: feature11, value12: feature12, value13: feature13};
+					break;
+				case "Diamantanes":
+					var feature01 = document.getElementById("Diamantanes_92").value;
+					var feature02 = document.getElementById("Diamantanes_54").value;
+					var feature03 = document.getElementById("Diamantanes_14").value;
+					var feature04 = document.getElementById("Diamantanes_53").value;
+					var feature05 = document.getElementById("Diamantanes_67").value;
+					featureArray = {value00: biomarker, value01: feature01, value02: feature02, value03: feature03,
+					value04: feature04, value05: feature05};
+					break;
+				case "MA-steranes":
+					var feature01 = document.getElementById("MA-steranes_112").value;
+					var feature02 = document.getElementById("MA-steranes_411").value;
+					var feature03 = document.getElementById("MA-steranes_54").value;
+					var feature04 = document.getElementById("MA-steranes_126").value;
+					var feature05 = document.getElementById("MA-steranes_118+9+10").value;
+					var feature06 = document.getElementById("MA-steranes_67").value;
+					var feature07 = document.getElementById("MA-steranes_8+9+1012").value;
+					featureArray = {value00: biomarker, value01: feature01, value02: feature02, value03: feature03,
+					value04: feature04, value05: feature05, value06: feature06, value07: feature07};
+					break;
+				case "TA-steranes":
+					var feature01 = document.getElementById("TA-steranes_3b7").value;
+					var feature02 = document.getElementById("TA-steranes_3b1").value;
+					var feature03 = document.getElementById("TA-steranes_86").value;
+					var feature04 = document.getElementById("TA-steranes_64").value;
+					var feature05 = document.getElementById("TA-steranes_67").value;
+					var feature06 = document.getElementById("TA-steranes_3b3a").value;
+					var feature07 = document.getElementById("TA-steranes_21").value;
+					featureArray = {value00: biomarker, value01: feature01, value02: feature02, value03: feature03,
+					value04: feature04, value05: feature05, value06: feature06, value07: feature07};
+					break;
+				case "Steranes":
+					var feature01 = document.getElementById("Steranes_161").value;
+					var feature02 = document.getElementById("Steranes_1418").value;
+					var feature03 = document.getElementById("Steranes_87").value;
+					var feature04 = document.getElementById("Steranes_1613").value;
+					var feature05 = document.getElementById("Steranes_1716").value;
+					var feature06 = document.getElementById("Steranes_810").value;
+					var feature07 = document.getElementById("Steranes_118").value;
+					var feature08 = document.getElementById("Steranes_811").value;
+					var feature09 = document.getElementById("Steranes_1513").value;
+					var feature10 = document.getElementById("Steranes_1314").value;
+					featureArray = {value00: biomarker, value01: feature01, value02: feature02, value03: feature03,
+					value04: feature04, value05: feature05,value06: feature06, value07: feature07, value08: feature08
+					, value09: feature09, value10: feature10};
+					break;
+			}
+			$.post( "http://127.0.0.1:5000/", featureArray, function(data) {
+				$("#result").text(data);
+			});
+		});
+	});
+	</script>
 
 
 </body>
