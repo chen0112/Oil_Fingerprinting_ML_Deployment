@@ -1,2 +1,2 @@
-# Oil fingerpringting-prediction
+# Oil fingerpringting prediction
 This repository is for weathered oil type prediction based on five biomarkers.
